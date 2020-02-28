@@ -3,30 +3,41 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ApartmentsSearch */
 /* @var $dataProvider yii\data\ArrayDataProvider */
 /* @var $typeList array */
 
-$this->title = 'Apartments';
+$this->title = 'Квартиры';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="apartments-index">
+    <? echo Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <header><?= Html::encode($this->title) ?></header>
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+    <div class="row">
+        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+            <div class="col col-sm-3">
+                <?= $form->field($searchModel, 'city')->textInput() ?>
+            </div>
 
-        <?= $form->field($searchModel, 'city')->textInput() ?>
+            <div class="col col-sm-3">
+                <?= $form->field($searchModel, 'apartment_type')->dropDownList($typeList, [
+                    'class' => "selectpicker type",
+                ])->label("Type")?>
+            </div>
 
-        <?= $form->field($searchModel, 'apartment_type')->dropDownList($typeList, [
-            'class' => "selectpicker type",
-        ])->label("Type")?>
-
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-success', 'value' => 'search', 'name' => 'search']) ?>
-
-    <?php ActiveForm::end() ?>
+            <div class="col col-sm-2">
+                <?= Html::submitButton('Поиск', ['class' => 'btn btn-search btn-warning', 'value' => 'search', 'name' => 'search']) ?>
+            </div>
+        <?php ActiveForm::end() ?>
+    </div>
 
     <?php Pjax::begin(); ?>
 

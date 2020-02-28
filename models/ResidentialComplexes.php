@@ -56,4 +56,9 @@ class ResidentialComplexes extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Houses::className(), ['residential_com_id' => 'id']);
     }
+
+    public static function getAllResidentialComplexes()
+    {
+        return self::find()->asArray()->all();
+    }
 }

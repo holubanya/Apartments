@@ -6,14 +6,19 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\Breadcrumbs;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <? echo Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
 
-    <p>Please fill out the following fields to login:</p>
+    <header><?= Html::encode($this->title) ?></header>
+
+    <p>Заполните форму чтобы войти</p>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',

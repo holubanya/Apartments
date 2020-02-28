@@ -40,12 +40,10 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ResidentialComplexesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $residentialComplexes = ResidentialComplexes::getAllResidentialComplexes();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'residentialComplexes' => $residentialComplexes,
         ]);
     }
 

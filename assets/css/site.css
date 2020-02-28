@@ -4,6 +4,28 @@ header{
 .heading{
     font-size: 24px;
     margin-bottom: 15px;
+    display: block;
+    color: #111111;
+}
+.heading:hover{
+    text-decoration: none;
+}
+
+.rc-container{
+    width: calc(100% + 20px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.rc-block{
+    width: 100%;
+    max-width: calc(33% - 20px);
+    box-shadow: 0 2px 6px 1px rgba(90, 98, 104, 0.3);
+    padding: 20px;
+    margin: 10px 20px 10px 0;
+}
+.rc-block:hover{
+    box-shadow: 0 2px 6px 1px rgba(90, 98, 104, 0.5);
 }
 .title{
     font-weight: bold;
@@ -17,9 +39,13 @@ header{
     display: block;
 }
 .text{
-    font-size: 12px;
+    font-size: 13px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-bottom: 15px;
+}
+.btn-search{
+    margin-top: 25px;
+    margin-left: -45px;
 }
 .btn-container{
     display: flex;
@@ -37,6 +63,9 @@ header{
 .btn-container .active{
     background-color: #f5f5f5;
     box-shadow: 0 2px 6px 1px rgba(90, 98, 104, 0.3);
+}
+.add-container{
+    margin-bottom: 30px;
 }
 .input-container input{
     display: none;
@@ -81,4 +110,18 @@ header{
 }
 .input:focus{
     box-shadow: 0 2px 6px 1px rgba(90, 98, 104, 0.3);
+}
+.house-container{
+    width: calc(100% + 20px);
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+.house-block{
+    width: 100%;
+    max-width: calc(33% - 20px);
+    box-shadow: 0 2px 6px 1px rgba(90, 98, 104, 0.3);
+    padding: 20px;
+    margin: 10px 20px 10px 0;
 }

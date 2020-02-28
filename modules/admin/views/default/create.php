@@ -1,20 +1,27 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ResidentialComplexes */
 
-$this->title = 'Create Residential Complexes';
-$this->params['breadcrumbs'][] = ['label' => 'Residential Complexes', 'url' => ['index']];
+$this->title = 'Создать жилой комплекс';
+$this->params['breadcrumbs'][] = ['label' => 'Новостройки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="residential-complexes-create">
+    <? echo Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <header><?= Html::encode($this->title) ?></header>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    <div class="row">
+        <div class="col col-sm-6">
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+        </div>
+    </div>
 </div>

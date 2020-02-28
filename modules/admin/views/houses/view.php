@@ -15,7 +15,7 @@ use yii\widgets\LinkPager;
 /* @var $pages */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Admin', 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => 'Новостройки', 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => $residence->name, 'url' => ['/admin/default/view', 'id' => $residence->id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 <?php endforeach ?>
             <?php else: ?>
-                <div>Нет домов</div>
+                <div>Нет квартир</div>
             <?php endif?>
             <?= LinkPager::widget([
                 'pagination' => $pages,

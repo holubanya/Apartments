@@ -13,7 +13,7 @@ use yii\widgets\DetailView;
 /* @var $typeList array */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Admin', 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => 'Новостройки', 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -35,14 +35,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-    <?php if (count($houses)): ?>
-        <?php foreach($houses as $house): ?>
-            <div><?= Html::encode($house->name) ?></div>
-        <?php endforeach ?>
-    <?php else: ?>
-        <div>Нет домов</div>
-    <?php endif?>
-    <div class="row">
+    <div class="house-container">
+        <?php if (count($houses)): ?>
+            <?php foreach($houses as $house): ?>
+                <div class="card house-block">
+                    <div class="card-body">
+                        <?= Html::a(Html::encode($house->name), ['houses/view', 'id' => $house->id], ['class' => 'heading']) ?>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        <?php else: ?>
+            <div>Нет домов</div>
+        <?php endif?>
+    </div>
+    <div class="row add-container">
         <div class="col col-sm-6">
             <div class="heading">Создать дом</div>
 

@@ -70,6 +70,6 @@ class Houses extends \yii\db\ActiveRecord
     }
 
     public static function getHousesByResidenceId($RCId){
-        return self::find()->select(['name'])->where(['residential_com_id' => $RCId])->all();
+        return self::find()->select(['name', 'id'])->where(['residential_com_id' => $RCId])->all();
     }
 }
