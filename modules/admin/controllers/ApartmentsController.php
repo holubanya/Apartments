@@ -51,9 +51,10 @@ class ApartmentsController extends Controller
      */
     public function actionDelete($id)
     {
+        $houseId = HousesApartments::getHouseId($id);
         $this->findModel($id)->delete();
 
-        return $this->redirect(['houses/view', 'id' =>  HousesApartments::getHouseId($id)]);
+        return $this->redirect(['houses/view', 'id' => $houseId]);
     }
 
     /**

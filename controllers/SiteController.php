@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\ApartmentsType;
 use Yii;
 use app\models\ApartmentsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 
@@ -12,6 +13,27 @@ use yii\web\Controller;
 class SiteController extends Controller
 {
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['login', 'logout'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['login'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
     /**
      * @return mixed
      */

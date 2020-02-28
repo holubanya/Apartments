@@ -112,9 +112,10 @@ class HousesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $house = $this->findModel($id);
+        $rcId = $house->residential_com_id;
+        $house->delete();
+        return $this->redirect(['default/view', 'id' =>  $rcId]);
     }
 
     /**
