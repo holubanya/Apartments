@@ -44,11 +44,11 @@ class ApartmentsSearch extends Model
      */
     public function search()
     {
-        $provider = ResidentialComplexes::find()
-            ->select(["Residential_Complexes.name AS rc_name", 'city', "h.name AS h_name",  'total_area', 'total_price'])
-            ->leftJoin(['h' => 'Houses'], 'h.residential_com_id = Residential_Complexes.id')
-            ->leftJoin(['ha' => 'Houses_Apartments'], 'h.id = ha.house_id')
-            ->leftJoin(['a' => 'Apartments'], 'ha.apartment_id = a.id');
+        $provider = Apartments::find()
+            ->select(["rc.name AS rc_name", 'city', "h.name AS h_name",  'total_area', 'total_price'])
+            ->leftJoin(['ha' => 'Houses_Apartments'], 'ha.apartment_id = Apartments.id')
+            ->leftJoin(['h' => 'Houses'], 'ha.house_id = h.id')
+            ->leftJoin(['rc' => 'Residential_Complexes'], 'h.residential_com_id = rc.id');
 
         if ($this->city)
             $provider->andWhere(['like', 'city', $this->city]);

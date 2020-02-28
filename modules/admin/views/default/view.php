@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ResidentialComplexes */
@@ -26,11 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="text"><?= Html::encode($model->city) ?></div>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить ЖК', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить ЖК', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены что хотите удалить этот ЖК?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -41,8 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card house-block">
                     <div class="card-body">
                         <?= Html::a(Html::encode($house->name), ['houses/view', 'id' => $house->id], ['class' => 'heading']) ?>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <?= Html::a('Изменить', ['houses/update', 'id' => $house->id], [
+                            'class' => 'card-link',
+                            'data' => ['method' => 'post'],
+                        ]) ?>
+                        <?= Html::a('Удалить', ['houses/delete', 'id' => $house->id], [
+                            'class' => 'card-link',
+                            'data' => ['method' => 'post', 'confirm' => 'Вы уверены что хотите удалить этот дом?',],
+                        ]) ?>
                     </div>
                 </div>
             <?php endforeach ?>

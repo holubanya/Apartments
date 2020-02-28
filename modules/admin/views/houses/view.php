@@ -1,9 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\DetailView;
 use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
@@ -27,16 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
     <header><?= Html::encode($this->title) ?></header>
     <div class="text"><?= Html::encode($residence->city) ?></div>
-<!--    <p>-->
-<!--        --><?//= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-<!--        --><?//= Html::a('Delete', ['delete', 'id' => $model->id], [
-//            'class' => 'btn btn-danger',
-//            'data' => [
-//                'confirm' => 'Are you sure you want to delete this item?',
-//                'method' => 'post',
-//            ],
-//        ]) ?>
-<!--    </p>-->
+
+    <p>
+        <?= Html::a('Изменить дом', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить дом', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Вы уверены что хотите удалить дом?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
     <div class="row">
         <div class="col col-sm-8 apartments-container">
             <?php if (count($apartmentsList)): ?>
@@ -52,7 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]) ?>
                             <?= Html::a('Удалить', ['apartments/delete', 'id' => $apartment["apartment_id"]], [
                                 'class' => 'card-link',
-                                'data' => ['method' => 'post'],
+                                'data' => [
+                                    'method' => 'post',
+                                    'confirm' => 'Вы уверены что хотите удалить эту квартиру?'
+                                ],
                             ]) ?>
                         </div>
                     </div>

@@ -10,7 +10,6 @@ use yii\widgets\Breadcrumbs;
 
 $this->title = 'Изменть квартиру: ' . $typeList[$apartment["type_id"]];
 $this->params['breadcrumbs'][] = ['label' => 'Новостройки', 'url' => ['/admin']];
-//$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Изменть квартиру';
 ?>
 <div class="apartments-update">
