@@ -10,6 +10,7 @@ use Yii;
 use app\models\Houses;
 use app\models\HousesSaerch;
 use yii\data\Pagination;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -31,22 +32,19 @@ class HousesController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->is_admin === 1;
+                        }
+                    ],
+                ],
+            ],
         ];
-    }
-
-    /**
-     * Lists all Houses models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new HousesSaerch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
     /**
@@ -82,24 +80,6 @@ class HousesController extends Controller
     }
 
     /**
-     * Creates a new Houses model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Houses();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Updates an existing Houses model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -125,6 +105,8 @@ class HousesController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

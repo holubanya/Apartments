@@ -45,9 +45,9 @@ class Apartments extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type_id' => 'Type ID',
-            'total_area' => 'Total Area',
-            'total_price' => 'Total Price',
+            'type_id' => 'Количество комнат',
+            'total_area' => 'Общая площадь',
+            'total_price' => 'Стоимость',
         ];
     }
 

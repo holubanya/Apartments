@@ -26,7 +26,7 @@ use yii\helpers\Html;use yii\widgets\ActiveForm;
 
             <?= $form->field($newApartment, 'type_id')->dropDownList($typeList, [
                 'class' => "selectpicker",
-            ])->label("Type")?>
+            ])?>
 
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'name' => 'addApartment', 'value' => 'addApartment']) ?>
         <?php ActiveForm::end(); ?>

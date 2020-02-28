@@ -44,8 +44,8 @@ class Houses extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'residential_com_id' => 'Residential Com ID',
+            'name' => 'Название',
+            'residential_com_id' => 'Residential Complex ID',
         ];
     }
 
@@ -69,7 +69,8 @@ class Houses extends \yii\db\ActiveRecord
         return $this->hasMany(HousesApartments::className(), ['house_id' => 'id']);
     }
 
-    public static function getHousesByResidenceId($RCId){
+    public static function getHousesByResidenceId($RCId)
+    {
         return self::find()->select(['name', 'id'])->where(['residential_com_id' => $RCId])->all();
     }
 }

@@ -89,4 +89,10 @@ class HousesApartments extends \yii\db\ActiveRecord
             'apartment_id' => $newApartmentId,
         ])->execute();
     }
+
+    public static function getHouseId($aId)
+    {
+        $haModel = self::findOne(['apartment_id' => $aId]);
+        return $haModel->house_id;
+    }
 }

@@ -42,8 +42,8 @@ class ResidentialComplexes extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'city' => 'City',
+            'name' => 'Название',
+            'city' => 'Город',
         ];
     }
 

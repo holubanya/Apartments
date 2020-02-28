@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col col-sm-3">
                 <?= $form->field($searchModel, 'apartment_type')->dropDownList($typeList, [
                     'class' => "selectpicker type",
-                ])->label("Type")?>
+                ])?>
             </div>
 
             <div class="col col-sm-2">

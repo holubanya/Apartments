@@ -8,11 +8,10 @@ use app\models\Houses;
 use app\models\HousesApartments;
 use Yii;
 use app\models\ResidentialComplexes;
-use app\models\ResidentialComplexesSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Request;
 
 /**
  * DefaultController implements the CRUD actions for ResidentialComplexes model.
@@ -29,6 +28,18 @@ class DefaultController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->is_admin === 1;
+                        }
+                    ],
                 ],
             ],
         ];
@@ -124,6 +135,8 @@ class DefaultController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

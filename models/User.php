@@ -73,13 +73,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->id;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getIsAdmin()
-    {
-        return $this->is_admin;
-    }
 
     /**
      * {@inheritdoc}

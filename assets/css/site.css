@@ -76,11 +76,12 @@ header{
 .apartments-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .apartment-block{
     max-width: calc(33% - 10px);
     margin-bottom: 10px;
+    margin-right: 10px;
     width: 100%;
     border: 1px solid #DDE5EB;
     padding: 15px;

@@ -8,22 +8,52 @@ use app\models\Apartments;
 use app\models\ApartmentsType;
 use app\models\HousesApartments;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class ApartmentsController extends Controller
 {
     /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->is_admin === 1;
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
+    /**
      * Deletes an existing Apartments model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['houses/view', 'id' =>  $this->getHouseId($id)]);
+        return $this->redirect(['houses/view', 'id' =>  HousesApartments::getHouseId($id)]);
     }
 
     /**
@@ -38,7 +68,7 @@ class ApartmentsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['houses/view', 'id' => $this->getHouseId($id)]);
+            return $this->redirect(['houses/view', 'id' => HousesApartments::getHouseId($id)]);
         }
 
         return $this->render('update', [
@@ -63,9 +93,5 @@ class ApartmentsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function getHouseId($aId)
-    {
-        $haModel = HousesApartments::findOne(['apartment_id' => $aId]);
-        return $haModel->house_id;
-    }
+
 }

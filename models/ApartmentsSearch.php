@@ -24,6 +24,16 @@ class ApartmentsSearch extends Model
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'city' => 'Город',
+            'apartment_type' => 'Количество комнат',
+        ];
+    }
 
     /**
      * Creates data provider instance with search query applied
