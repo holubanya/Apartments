@@ -11,6 +11,7 @@ use yii\web\IdentityInterface;
  * @property int $id
  * @property string $login
  * @property string $password
+ * @property int $is_admin
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -29,7 +30,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['id', 'login', 'password'], 'required'],
-            [['id'], 'integer'],
+            [['id', 'is_admin'], 'integer'],
             [['login', 'password'], 'string', 'max' => 50],
             [['id'], 'unique'],
         ];
@@ -44,6 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
             'id' => 'ID',
             'login' => 'Login',
             'password' => 'Password',
+            'is_admin' => 'Is Admin',
         ];
     }
 
@@ -70,6 +72,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getIsAdmin()
+    {
+        return $this->is_admin;
     }
 
     /**

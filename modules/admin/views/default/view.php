@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -12,14 +13,18 @@ use yii\widgets\DetailView;
 /* @var $typeList array */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Residential Complexes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Admin', 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="residential-complexes-view">
+    <? echo Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <h5><?= Html::encode($model->city) ?></h5>
+    <header><?= Html::encode($this->title) ?></header>
+    <div class="text"><?= Html::encode($model->city) ?></div>
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -37,24 +42,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else: ?>
         <div>Нет домов</div>
     <?php endif?>
-    <h5>Создать дом</h5>
+    <div class="row">
+        <div class="col col-sm-6">
+            <div class="heading">Создать дом</div>
 
-    <?php $form = ActiveForm::begin(); ?>
-        <?= $form->field($newHouse, 'name')->textInput(['maxlength' => true]) ?>
-        <?= Html::submitButton('Create house', ['class' => 'btn btn-success', 'name' => 'addHouse', 'value' => 'addHouse']) ?>
-    <?php ActiveForm::end(); ?>
+            <?php $form = ActiveForm::begin(); ?>
+                <?= $form->field($newHouse, 'name')->textInput(['maxlength' => true]) ?>
+                <?= Html::submitButton('Создать дом', ['class' => 'btn btn-success', 'name' => 'addHouse', 'value' => 'addHouse']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
+        <div class="col col-sm-6">
+            <div class="heading">Создать типовую квартиру</div>
 
-    <h5>Создать типовую квартиру</h5>
-
-    <?php $form = ActiveForm::begin(); ?>
-        <?= $form->field($newApartment, 'total_area')->textInput(['maxlength' => true]) ?>
-
-        <?= $form->field($newApartment, 'total_price')->textInput(['maxlength' => true]) ?>
-
-        <?= $form->field($newApartment, 'type_id')->dropDownList($typeList, [
-            'class' => "selectpicker",
-        ])->label("Type")?>
-
-        <?= Html::submitButton('Create apartment', ['class' => 'btn btn-success', 'name' => 'addApartment', 'value' => 'addApartment']) ?>
-    <?php ActiveForm::end(); ?>
+            <?= $this->render('..\common\_form_apartments.php', [
+                'typeList' => $typeList,
+                'newApartment' => $newApartment,
+            ]) ?>
+        </div>
+    </div>
 </div>

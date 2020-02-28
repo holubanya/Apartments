@@ -27,10 +27,18 @@ class AppAsset extends AssetBundle
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js',
         "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js",
-        'js/apartments.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
     ];
+    function __construct($config = [])
+    {
+        parent::__construct($config);
+        $this->publishOptions = [
+            "beforeCopy" => function ($from, $to) {
+                return substr($from, -strlen(".php")) != ".php";
+            },
+        ];
+    }
 }

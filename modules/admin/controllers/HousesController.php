@@ -9,6 +9,7 @@ use app\models\ResidentialComplexes;
 use Yii;
 use app\models\Houses;
 use app\models\HousesSaerch;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -59,6 +60,10 @@ class HousesController extends Controller
         $request = Yii::$app->request;
         $model = $this->findModel($id);
         $newApartment = new Apartments();
+        $apartments = Apartments::getApartmentsInHouse($id);
+        $pages = new Pagination(['totalCount' => count($apartments)]);
+        $pages->setPageSize(12);
+        $apartments = array_slice($apartments, $pages->offset, $pages->limit);
 
         if($request->post('addApartment') && $newApartment->load($request->post()) && $newApartment->validate())
         {
@@ -71,7 +76,8 @@ class HousesController extends Controller
             'residence' => ResidentialComplexes::findOne($model->residential_com_id),
             'newApartment' => $newApartment,
             'typeList' => ApartmentsType::getTypesArr(),
-            'apartmentsList' => Apartments::getApartmentsInHouse($id)
+            'apartmentsList' => $apartments,
+            "pages" => $pages
         ]);
     }
 
