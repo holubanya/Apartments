@@ -12,10 +12,6 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <? echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-
     <header><?= Html::encode($this->title) ?></header>
 
     <p>Заполните форму чтобы войти</p>

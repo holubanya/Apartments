@@ -1,11 +1,11 @@
 <?php
-use yii\helpers\Html;use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $newApartment app\models\Apartments */
 /* @var $typeList array*/
 /* @var $form*/
 
-//$this->registerJsFile("@app/modules/admin/assets/js/apartments.js");
+$this->registerJsFile("@web/js/apartments.js");
 ?>
  <div class="add-apartment-container">
     <?= $form->field($newApartment, 'total_area')->textInput(['maxlength' => true, 'class' => 'total-area input']) ?>
@@ -30,48 +30,3 @@ use yii\helpers\Html;use yii\widgets\ActiveForm;
 
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'name' => 'addApartment', 'value' => 'addApartment']) ?>
  </div>
-
-<script>
-    $(function () {
-        let container = $(".add-apartment-container"),
-            toggleBtns = container.find(".toggle-btn"),
-            priceInput = container.find(".price-input"),
-            totalArea = container.find(".total-area"),
-            message = container.find(".message"),
-            input = container.find(".input"),
-            totalPrice  = container.find(".total-price");
-
-        toggleBtns.on("click", function(e){
-            e.preventDefault();
-            let current = $(e.currentTarget);
-            if (!current.hasClass("active")) {
-                toggleBtns.toggleClass("active");
-                priceInput.toggleClass("active");
-            }
-        });
-
-        input.on("blur", function(e){
-            let current = $(e.currentTarget);
-            current.val(current.val().replace(/,/g, "."));
-        });
-
-        priceInput.on("blur", function (e){
-            message.text("");
-            let current = $(e.currentTarget),
-                price = parseFloat(current.val().replace(/\s/g, ""));
-
-            if (!price)
-                message.text("Цена должна быть числом");
-            else {
-                if (current.hasClass("per-sm")){
-                    if (!totalArea.val())
-                        message.text("Укажите общую стоимость");
-                    else
-                        price *= totalArea.val();
-                }
-
-                totalPrice.val(price);
-            }
-        });
-    });
-</script>

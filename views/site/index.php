@@ -15,10 +15,6 @@ $this->title = 'Квартиры';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="apartments-index">
-    <? echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-
     <header><?= Html::encode($this->title) ?></header>
 
     <div class="row">

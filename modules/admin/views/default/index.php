@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $residentialComplexes array */
@@ -10,17 +9,13 @@ $this->title = 'Новостройки ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="residential-complexes-index">
-    <? echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-
     <header><?= Html::encode($this->title) ?></header>
-
     <p>
         <?= Html::a('Создать жилой комплекс', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="rc-container">
         <?php if (count($residentialComplexes)): ?>
+
             <?php foreach($residentialComplexes as $residentialComplex): ?>
                 <div class="card rc-block">
                     <div class="card-body">
@@ -29,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             <?php endforeach; ?>
+
         <?php else: ?>
             <div>Нет новостроек</div>
         <?php endif ?>

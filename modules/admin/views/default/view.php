@@ -4,7 +4,6 @@ use app\models\Apartments;
 use app\models\Houses;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ResidentialComplexes */
@@ -17,10 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="residential-complexes-view">
-    <? echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-
     <header><?= Html::encode($this->title) ?></header>
 
     <div class="text"><?= Html::encode($model->city) ?></div>

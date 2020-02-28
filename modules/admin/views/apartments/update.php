@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Apartments */
@@ -14,10 +13,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Новостройки', 'url' => 
 $this->params['breadcrumbs'][] = 'Изменть квартиру';
 ?>
 <div class="apartments-update">
-    <? echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-
     <header><?= Html::encode($this->title) ?></header>
 
     <div class="row">
