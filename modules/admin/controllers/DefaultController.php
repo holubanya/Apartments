@@ -2,10 +2,8 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\Apartments;
 use app\models\ApartmentsType;
 use app\models\Houses;
-use app\models\HousesApartments;
 use Yii;
 use app\models\ResidentialComplexes;
 use yii\filters\AccessControl;
@@ -66,27 +64,9 @@ class DefaultController extends Controller
      */
     public function actionView($id)
     {
-        $request = Yii::$app->request;
-        $newHouse = new Houses();
-        $newHouse->residential_com_id = $id;
-        $newApartment = new Apartments();
-
-        if($request->post('addHouse') && $newHouse->load($request->post()) && $newHouse->validate())
-        {
-            $newHouse->save();
-        }
-
-        if($request->post('addApartment') && $newApartment->load($request->post()) && $newApartment->validate())
-        {
-            $newApartment->save();
-            HousesApartments::AddApartmentToResidence($id, $newApartment->id);
-        }
-
         return $this->render('view', [
             'model' => $this->findModel($id),
             'houses' => Houses::getHousesByResidenceId($id),
-            'newHouse' => $newHouse,
-            'newApartment' => $newApartment,
             'typeList' => ApartmentsType::getTypesArr()
         ]);
     }

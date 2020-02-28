@@ -77,6 +77,28 @@ class ApartmentsController extends Controller
         ]);
     }
 
+    public function actionCreate($houseId)
+    {
+        $newApartment = new Apartments();
+        if($newApartment->load(Yii::$app->request->post()) && $newApartment->validate())
+        {
+            $newApartment->save();
+            HousesApartments::AddApartmentToHouse($houseId, $newApartment->id);
+        }
+        return $this->redirect(['houses/view', 'id' => $houseId]);
+    }
+
+    public function actionCreateTypical($rcId)
+    {
+        $newApartment = new Apartments();
+        if($newApartment->load(Yii::$app->request->post()) && $newApartment->validate())
+        {
+            $newApartment->save();
+            HousesApartments::AddApartmentToResidence($rcId, $newApartment->id);
+        }
+        return $this->redirect(['default/view', 'id' =>  $rcId]);
+    }
+
     /**
      * Finds the Apartments model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

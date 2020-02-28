@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
@@ -21,10 +22,13 @@ $this->params['breadcrumbs'][] = 'Изменть квартиру';
 
     <div class="row">
         <div class="col col-sm-6">
-            <?= $this->render('..\common\_form_apartments.php', [
-                'typeList' => $typeList,
-                'newApartment' => $apartment,
-            ]) ?>
+            <?php $form = ActiveForm::begin(); ?>
+                <?= $this->render('..\common\_form_apartments.php', [
+                    'typeList' => $typeList,
+                    'newApartment' => $apartment,
+                    'form' => $form
+                ]) ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>

@@ -55,30 +55,32 @@ class HousesController extends Controller
      */
     public function actionView($id)
     {
-        $request = Yii::$app->request;
         $model = $this->findModel($id);
-        $newApartment = new Apartments();
         $apartments = Apartments::getApartmentsInHouse($id);
         $pages = new Pagination(['totalCount' => count($apartments)]);
         $pages->setPageSize(12);
         $apartments = array_slice($apartments, $pages->offset, $pages->limit);
 
-        if($request->post('addApartment') && $newApartment->load($request->post()) && $newApartment->validate())
-        {
-            $newApartment->save();
-            HousesApartments::AddApartmentToHouse($id, $newApartment->id);
-        }
-
         return $this->render('view', [
             'model' => $model,
             'residence' => ResidentialComplexes::findOne($model->residential_com_id),
-            'newApartment' => $newApartment,
             'typeList' => ApartmentsType::getTypesArr(),
             'apartmentsList' => $apartments,
             "pages" => $pages
         ]);
     }
 
+    public function actionCreate($rcId)
+    {
+        $newHouse = new Houses();
+        $newHouse->residential_com_id = $rcId;
+
+        if($newHouse->load( Yii::$app->request->post()) && $newHouse->validate())
+        {
+            $newHouse->save();
+        }
+        return $this->redirect(['default/view', 'id' =>  $rcId]);
+    }
     /**
      * Updates an existing Houses model.
      * If update is successful, the browser will be redirected to the 'view' page.

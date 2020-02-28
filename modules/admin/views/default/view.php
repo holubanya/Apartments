@@ -1,13 +1,13 @@
 <?php
 
+use app\models\Apartments;
+use app\models\Houses;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ResidentialComplexes */
-/* @var $newApartment app\models\Apartments */
-/* @var $newHouse app\models\Houses */
 /* @var $houses array */
 /* @var $typeList array */
 
@@ -22,10 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <header><?= Html::encode($this->title) ?></header>
-    <div class="text"><?= Html::encode($model->city) ?></div>
 
+    <div class="text"><?= Html::encode($model->city) ?></div>
     <p>
         <?= Html::a('Изменить ЖК', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
         <?= Html::a('Удалить ЖК', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -40,10 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card house-block">
                     <div class="card-body">
                         <?= Html::a(Html::encode($house->name), ['houses/view', 'id' => $house->id], ['class' => 'heading']) ?>
+
                         <?= Html::a('Изменить', ['houses/update', 'id' => $house->id], [
                             'class' => 'card-link',
                             'data' => ['method' => 'post'],
                         ]) ?>
+
                         <?= Html::a('Удалить', ['houses/delete', 'id' => $house->id], [
                             'class' => 'card-link',
                             'data' => ['method' => 'post', 'confirm' => 'Вы уверены что хотите удалить этот дом?',],
@@ -59,18 +62,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col col-sm-6">
             <div class="heading">Создать дом</div>
 
-            <?php $form = ActiveForm::begin(); ?>
-                <?= $form->field($newHouse, 'name')->textInput(['maxlength' => true]) ?>
-                <?= Html::submitButton('Создать дом', ['class' => 'btn btn-success', 'name' => 'addHouse', 'value' => 'addHouse']) ?>
+            <?php $form = ActiveForm::begin(['action' =>['houses/create', 'rcId' => $model->id]]); ?>
+
+                <?= $form->field(new Houses(), 'name')->textInput(['maxlength' => true]) ?>
+
+                <?= Html::submitButton('Создать дом', ['class' => 'btn btn-success']) ?>
+
             <?php ActiveForm::end(); ?>
         </div>
         <div class="col col-sm-6">
             <div class="heading">Создать типовую квартиру</div>
 
-            <?= $this->render('..\common\_form_apartments.php', [
-                'typeList' => $typeList,
-                'newApartment' => $newApartment,
-            ]) ?>
+            <?php $form = ActiveForm::begin(['action' =>['apartments/create-typical', 'rcId' => $model->id]]); ?>
+                <?= $this->render('..\common\_form_apartments.php', [
+                    'typeList' => $typeList,
+                    'newApartment' => new Apartments(),
+                    'form' => $form
+                ]) ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>

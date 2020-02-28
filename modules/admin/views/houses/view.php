@@ -1,12 +1,13 @@
 <?php
 
+use app\models\Apartments;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Houses */
-/* @var $newApartment app\models\Apartments */
 /* @var $typeList array*/
 /* @var $apartmentsList array*/
 /* @var $residence app\models\ResidentialComplexes */
@@ -69,11 +70,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col col-sm-4">
             <div class="heading">Создать не типовую квартиру</div>
-
-            <?= $this->render('..\common\_form_apartments.php', [
-                'typeList' => $typeList,
-                'newApartment' => $newApartment,
-            ]) ?>
+            <?php $form = ActiveForm::begin(['action' =>['apartments/create', 'houseId' => $model->id]]); ?>
+                <?= $this->render('..\common\_form_apartments.php', [
+                    'typeList' => $typeList,
+                    'newApartment' => new Apartments(),
+                    'form' => $form
+                ]) ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>

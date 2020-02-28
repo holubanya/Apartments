@@ -61,4 +61,5 @@ class ResidentialComplexes extends \yii\db\ActiveRecord
     {
         return self::find()->asArray()->all();
     }
+
 }
