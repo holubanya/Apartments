@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php $form = ActiveForm::begin(['action' =>['apartments/create', 'houseId' => $model->id]]); ?>
 
-                <?= $this->render('..\common\_form_apartments.php', [
+                <?= $this->render('../common/_form_apartments.php', [
                     'typeList' => $typeList,
                     'newApartment' => new Apartments(),
                     'form' => $form

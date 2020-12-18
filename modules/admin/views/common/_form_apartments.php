@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 
+/* @var $this yii\web\View */
 /* @var $newApartment app\models\Apartments */
 /* @var $typeList array*/
 /* @var $form*/
