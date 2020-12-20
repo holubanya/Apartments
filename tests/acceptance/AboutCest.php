@@ -4,9 +4,9 @@ use yii\helpers\Url;
 
 class AboutCest
 {
-    public function ensureThatAboutWorks(AcceptanceTester $I)
+    public function ensureThatMainWorks(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/site/about'));
-        $I->see('About', 'h1');
+        $I->amOnPage(Url::toRoute('/'));
+        $I->see('Квартиры', 'h1');
     }
 }

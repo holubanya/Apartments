@@ -15,16 +15,12 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
-class FunctionalTester extends \Codeception\Actor
+ */
+class BddTester extends \Codeception\Actor
 {
-    use _generated\FunctionalTesterActions;
-    public function see($text, $selector = NULL)
-    {
-        return true;
-    }
+    use _generated\UnitTesterActions;
 
-    public function submitForm($selector, $params, $button = NULL) {
-        return true;
-    }
+    /**
+     * Define custom actions here
+     */
 }
