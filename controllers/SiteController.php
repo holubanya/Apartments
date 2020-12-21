@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use app\models\ApartmentsType;
+use http\Client;
 use Yii;
 use app\models\ApartmentsSearch;
+use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -54,5 +56,27 @@ class SiteController extends Controller
             'dataProvider' => $dataProvider,
             'typeList' => ApartmentsType::getTypesArr()
         ]);
+    }
+
+    public function actionSearch($city, $type) {
+        $client = new Client();
+
+        $response = $client->createRequest()
+            ->setMethod('get')
+            ->setUrl('localhost::8383/')
+            ->setParametrs([
+                'city' => $city,
+                'type' => $type
+            ])
+            ->send();
+
+        $dataProvider = new ArrayDataProvider([
+              'allModels' => $response,
+              'pagination' => [
+                  'pageSize' => 10,
+              ]
+          ]);
+
+        return $dataProvider;
     }
 }
